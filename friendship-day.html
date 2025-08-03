@@ -6,14 +6,15 @@
     <title>Happy Friendship Day, Safa!</title>
     <style>
         :root {
-            --primary: #6c63ff;
-            --secondary: #b3a4ff;
+            --primary: #8b7cf8;
+            --secondary: #c4b5fd;
             --light-purple: #e0d7ff;
-            --text: #2f2f46;
-            --card-bg: #ffffff;
-            --letter-bg: #f8f4ff;
-            --shadow: 0 25px 60px -10px rgba(44,44,80,0.15);
+            --text: #e2e8f0;
+            --card-bg: rgba(30, 41, 59, 0.95);
+            --letter-bg: rgba(51, 65, 85, 0.9);
+            --shadow: 0 25px 60px -10px rgba(0,0,0,0.4);
             --transition: 0.25s ease;
+            --night-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 100%);
         }
 
         * { box-sizing: border-box; }
@@ -23,7 +24,7 @@
             padding: 0;
             min-height: 100vh;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(135deg, #eef2ff 0%, #e0d7ff 100%);
+            background: var(--night-gradient);
             color: var(--text);
             display: flex;
             align-items: center;
@@ -33,7 +34,7 @@
             overflow-x: hidden;
         }
 
-        /* Floating Stars */
+        /* Enhanced Floating Stars */
         .stars {
             position: fixed;
             top: 0;
@@ -48,12 +49,41 @@
             position: absolute;
             border-radius: 50%;
             opacity: 0;
-            animation: twinkle 4s ease-in-out infinite;
+            animation: sparkle 4s ease-in-out infinite;
+            box-shadow: 0 0 6px currentColor;
         }
 
-        @keyframes twinkle {
+        .star.bright {
+            animation: brightSparkle 3s ease-in-out infinite;
+            box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
+        }
+
+        .star.shooting {
+            animation: shootingStar 8s linear infinite;
+            border-radius: 2px;
+        }
+
+        @keyframes sparkle {
             0%, 100% { opacity: 0; transform: scale(0.8); }
-            50% { opacity: 0.6; transform: scale(1.2); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes brightSparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.6); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes shootingStar {
+            0% { 
+                opacity: 0; 
+                transform: translateX(-100px) translateY(100px) rotate(-45deg); 
+            }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { 
+                opacity: 0; 
+                transform: translateX(100vw) translateY(-100px) rotate(-45deg); 
+            }
         }
 
         .container {
@@ -66,6 +96,8 @@
             padding: 2rem 1.75rem 3rem;
             box-shadow: var(--shadow);
             text-align: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 124, 248, 0.3);
         }
 
         h1 {
@@ -75,11 +107,13 @@
             word-break: break-word;
             white-space: normal;
             min-height: 3.2rem;
+            text-shadow: 0 2px 10px rgba(139, 124, 248, 0.5);
         }
 
         .friend-name {
             color: var(--primary);
             font-weight: bold;
+            text-shadow: 0 0 20px var(--primary);
         }
 
         .typewriter { display: inline-block; }
@@ -100,18 +134,19 @@
             background: var(--letter-bg);
             padding: 1.6rem 1.6rem 1.8rem;
             border-radius: 14px;
-            box-shadow: 0 25px 60px -10px rgba(44,44,80,0.08);
+            box-shadow: 0 25px 60px -10px rgba(0,0,0,0.3);
             font-family: Georgia, "Times New Roman", serif;
             white-space: pre-wrap;
             transform-origin: top;
             text-align: left;
             position: relative;
-            border: 1px solid rgba(108,99,255,0.3);
+            border: 1px solid rgba(139, 124, 248, 0.4);
+            backdrop-filter: blur(10px);
         }
 
         .letter-header { 
             font-size: 0.75rem; 
-            color: #7e6fa5; 
+            color: var(--secondary); 
             position: absolute; 
             top: 10px; 
             right: 12px; 
@@ -119,7 +154,7 @@
 
         .btn { 
             cursor: pointer; 
-            background: var(--primary); 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none; 
             color: #fff; 
             padding: 0.9rem 1.4rem; 
@@ -131,17 +166,23 @@
             gap: 8px; 
             transition: var(--transition); 
             margin-top: 1rem; 
+            box-shadow: 0 8px 25px rgba(139, 124, 248, 0.3);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        .btn:hover { filter: brightness(1.05); }
+        .btn:hover { 
+            filter: brightness(1.1); 
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(139, 124, 248, 0.4);
+        }
         .btn:active { transform: scale(0.97); }
 
-        /* Reply Icon - More Visible */
+        /* Reply Icon - Night Theme */
         .reply-icon {
             position: absolute;
             bottom: 15px;
             right: 15px;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border: none;
             padding: 10px;
             border-radius: 50%;
@@ -150,13 +191,13 @@
             transition: all 0.3s ease;
             font-size: 16px;
             color: white;
-            box-shadow: 0 4px 12px rgba(108,99,255,0.3);
+            box-shadow: 0 8px 25px rgba(139, 124, 248, 0.4);
         }
 
         .reply-icon:hover {
-            background: var(--secondary);
             transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(108,99,255,0.4);
+            box-shadow: 0 12px 35px rgba(139, 124, 248, 0.6);
+            filter: brightness(1.2);
         }
 
         .letter-container.show .reply-icon {
@@ -164,19 +205,44 @@
             transition-delay: 1s;
         }
 
-        /* Reply Modal */
+        /* Music Toggle - Night Theme */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 41, 59, 0.9);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(139, 124, 248, 0.3);
+        }
+
+        .music-toggle:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 6px 20px rgba(139, 124, 248, 0.5);
+        }
+
+        /* Reply Modal - Night Theme */
         .reply-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.7);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             padding: 1rem;
+            backdrop-filter: blur(5px);
         }
 
         .reply-box {
@@ -187,65 +253,58 @@
             width: 100%;
             box-shadow: var(--shadow);
             position: relative;
+            border: 1px solid rgba(139, 124, 248, 0.3);
+            backdrop-filter: blur(20px);
         }
 
         .reply-box h3 {
             color: var(--primary);
             margin-bottom: 1rem;
             text-align: center;
+            text-shadow: 0 2px 10px rgba(139, 124, 248, 0.3);
         }
 
         .reply-textarea {
             width: 100%;
             min-height: 200px;
             padding: 1rem;
-            border: 2px solid rgba(108,99,255,0.3);
+            border: 2px solid rgba(139, 124, 248, 0.3);
             border-radius: 12px;
             font-family: Georgia, serif;
             font-size: 1rem;
             resize: vertical;
             background: var(--letter-bg);
             color: var(--text);
+            backdrop-filter: blur(10px);
         }
 
         .reply-textarea:focus {
             outline: none;
             border-color: var(--primary);
-        }
-
-        .reply-buttons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            justify-content: flex-end;
-        }
-
-        .reply-btn {
-            padding: 0.7rem 1.2rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(139, 124, 248, 0.3);
         }
 
         .send-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            box-shadow: 0 6px 20px rgba(139, 124, 248, 0.3);
         }
 
         .send-btn:hover {
-            background: var(--secondary);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 124, 248, 0.5);
+            filter: brightness(1.1);
         }
 
         .cancel-btn {
-            background: #f0f0f0;
+            background: rgba(71, 85, 105, 0.8);
             color: var(--text);
+            border: 1px solid rgba(139, 124, 248, 0.2);
         }
 
         .cancel-btn:hover {
-            background: #e0e0e0;
+            background: rgba(71, 85, 105, 1);
+            border-color: var(--primary);
         }
 
         .close-modal {
@@ -257,6 +316,10 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
         }
 
         /* Music Toggle - Top Corner */
@@ -442,26 +505,68 @@ Fardin`;
             step();
         }
 
-        // ==== FLOATING STARS ====
+        // ==== ENHANCED FLOATING STARS ====
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
-            for (let i = 0; i < 50; i++) {
+            const colors = [
+                'rgba(255, 255, 255, 0.9)',
+                'rgba(139, 124, 248, 0.8)',
+                'rgba(196, 181, 253, 0.7)',
+                'rgba(224, 215, 255, 0.6)',
+                'rgba(255, 215, 0, 0.8)',
+                'rgba(255, 182, 193, 0.7)'
+            ];
+            
+            // Regular twinkling stars
+            for (let i = 0; i < 80; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                const size = Math.random() * 4 + 2;
+                const size = Math.random() * 3 + 1;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
-                star.style.background = 'rgba(108,99,255,' + (Math.random() * 0.4 + 0.2) + ')';
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 4 + 's';
                 starsContainer.appendChild(star);
             }
+            
+            // Bright sparkling stars
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'star bright';
+                const size = Math.random() * 4 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.background = colors[Math.floor(Math.random() * 3)]; // Brighter colors
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+            
+            // Shooting stars
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const star = document.createElement('div');
+                    star.className = 'star shooting';
+                    star.style.width = '2px';
+                    star.style.height = '60px';
+                    star.style.background = 'linear-gradient(to bottom, rgba(255,255,255,1), transparent)';
+                    star.style.left = Math.random() * 50 + '%';
+                    star.style.top = Math.random() * 30 + '%';
+                    star.style.animationDelay = Math.random() * 8 + 's';
+                    starsContainer.appendChild(star);
+                    
+                    // Remove after animation
+                    setTimeout(() => star.remove(), 8000);
+                }, i * 15000); // Stagger shooting stars
+            }
         }
 
         // ==== CONFETTI ====
         function launchConfetti(particleCount = 120) {
-            const colors = ["#6c63ff", "#9fa8ff", "#b3a4ff", "#7f7fff", "#d0c7ff"];
+            const colors = ["#8b7cf8", "#c4b5fd", "#e0d7ff", "#a78bfa", "#ddd6fe", "#fbbf24"];
             const width = window.innerWidth;
             const height = window.innerHeight;
             
@@ -474,6 +579,7 @@ Fardin`;
                 div.style.height = size + "px";
                 div.style.left = Math.random() * width + "px";
                 div.style.top = (Math.random() * -60) + "px";
+                div.style.boxShadow = `0 0 6px ${colors[Math.floor(Math.random() * colors.length)]}`;
                 confettiContainer.appendChild(div);
                 
                 const duration = Math.random() * 1.3 + 1.4;
