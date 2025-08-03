@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Friendship Day, Safa!</title>
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #b3a4ff;
+            --light-purple: #e0d7ff;
+            --text: #2f2f46;
+            --card-bg: #ffffff;
+            --letter-bg: #f8f4ff;
+            --shadow: 0 25px 60px -10px rgba(44,44,80,0.15);
+            --transition: 0.25s ease;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0d7ff 100%);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 0.6; transform: scale(1.2); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem 1.75rem 3rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            line-height: 1.2;
+            word-break: break-word;
+            white-space: normal;
+            min-height: 3.2rem;
+        }
+
+        .friend-name {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .typewriter { display: inline-block; }
+        .cursor { 
+            display: inline-block; 
+            width: 2px; 
+            background: var(--primary); 
+            margin-left: 4px; 
+            animation: blink 1s step-end infinite; 
+            vertical-align: bottom; 
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .letter-container {
+            display: none;
+            margin-top: 1.5rem;
+            background: var(--letter-bg);
+            padding: 1.6rem 1.6rem 1.8rem;
+            border-radius: 14px;
+            box-shadow: 0 25px 60px -10px rgba(44,44,80,0.08);
+            font-family: Georgia, "Times New Roman", serif;
+            white-space: pre-wrap;
+            transform-origin: top;
+            text-align: left;
+            position: relative;
+            border: 1px solid rgba(108,99,255,0.3);
+        }
+
+        .letter-header { 
+            font-size: 0.75rem; 
+            color: #7e6fa5; 
+            position: absolute; 
+            top: 10px; 
+            right: 12px; 
+        }
+
+        .btn { 
+            cursor: pointer; 
+            background: var(--primary); 
+            border: none; 
+            color: #fff; 
+            padding: 0.9rem 1.4rem; 
+            font-size: 1rem; 
+            border-radius: 999px; 
+            font-weight: 600; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: var(--transition); 
+            margin-top: 1rem; 
+        }
+
+        .btn:hover { filter: brightness(1.05); }
+        .btn:active { transform: scale(0.97); }
+
+        /* Reply Icon - More Visible */
+        .reply-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: var(--primary);
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(108,99,255,0.3);
+        }
+
+        .reply-icon:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(108,99,255,0.4);
+        }
+
+        .letter-container.show .reply-icon {
+            opacity: 0.9;
+            transition-delay: 1s;
+        }
+
+        /* Reply Modal */
+        .reply-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 1rem;
+        }
+
+        .reply-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .reply-box h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .reply-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid rgba(108,99,255,0.3);
+            border-radius: 12px;
+            font-family: Georgia, serif;
+            font-size: 1rem;
+            resize: vertical;
+            background: var(--letter-bg);
+            color: var(--text);
+        }
+
+        .reply-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .reply-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: flex-end;
+        }
+
+        .reply-btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .send-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: #f0f0f0;
+            color: var(--text);
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* Music Toggle - Top Corner */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .music-toggle:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Confetti */
+        .confetti { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            pointer-events: none; 
+            z-index: 999; 
+        }
+
+        .confetti-piece { 
+            position: absolute; 
+            width: 8px; 
+            height: 8px; 
+            opacity: 0; 
+            border-radius: 50%; 
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container { 
+                padding: 1.6rem 1rem 2.5rem; 
+                margin: 10px;
+            }
+            
+            h1 { 
+                font-size: clamp(1.6rem, 6vw, 2.4rem);
+                line-height: 1.3;
+            }
+            
+            .letter-container {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
+            
+            .music-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { 
+                font-size: 1.8rem;
+                min-height: 2.8rem;
+            }
+            
+            .container {
+                padding: 1.2rem 0.8rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Stars -->
+    <div class="stars" id="starsContainer"></div>
+
+    <!-- Music Toggle -->
+    <button class="music-toggle" id="musicToggle">🎵</button>
+
+    <div class="container">
+        <h1>
+            <span class="typewriter" id="welcome"></span>
+            <span class="cursor"></span>
+        </h1>
+        
+        <button class="btn" id="showLetterBtn">💌 Open My Letter</button>
+        
+        <div id="letter" class="letter-container">
+            <div class="letter-header">For you, with love</div>
+            <div id="letterText"></div>
+            <button class="reply-icon" id="replyBtn" title="Reply to Letter">💬</button>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="reply-modal" id="replyModal">
+        <div class="reply-box">
+            <button class="close-modal" id="closeModal">×</button>
+            <h3>💌 Reply to Fardin</h3>
+            <textarea class="reply-textarea" id="replyTextarea" placeholder="Dear Fardin,
+
+Thank you for the beautiful Friendship Day message...
+
+With love,
+Safa"></textarea>
+            <div class="reply-buttons">
+                <button class="reply-btn cancel-btn" id="cancelReply">Cancel</button>
+                <button class="reply-btn send-btn" id="sendReply">📨 Send Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="confetti" id="confettiContainer"></div>
+
+    <script>
+        // ==== CUSTOMIZATION ====
+        const friendName = "Safa";
+        const letterContent = `Dear ${friendName},
+
+On this Friendship Day, I just want to let you know how much you mean to me. You have been a light, a support, and a true friend in every sense.
+
+Thank you for all the moments, big and small. I'm grateful for you every day.
+
+Yours truly,
+Fardin`;
+
+        // ==== ELEMENTS ====
+        const welcomeEl = document.getElementById("welcome");
+        const showLetterBtn = document.getElementById("showLetterBtn");
+        const letterEl = document.getElementById("letter");
+        const letterTextEl = document.getElementById("letterText");
+        const replyBtn = document.getElementById("replyBtn");
+        const musicToggle = document.getElementById("musicToggle");
+        const confettiContainer = document.getElementById("confettiContainer");
+        const replyModal = document.getElementById("replyModal");
+        const replyTextarea = document.getElementById("replyTextarea");
+        const sendReply = document.getElementById("sendReply");
+        const cancelReply = document.getElementById("cancelReply");
+        const closeModal = document.getElementById("closeModal");
+
+        // ==== AUDIO ====
+        let audio;
+        let ambientOn = false;
+
+        function initAmbient() {
+            audio = new Audio('friendship-212029.mp3'); // Replace with your ambient music file
+            audio.loop = true;
+            audio.volume = 0.3;
+        }
+
+        function toggleMusic() {
+            if (!audio) initAmbient();
+            
+            if (!ambientOn) {
+                audio.play().catch(e => console.log('Audio play failed:', e));
+                musicToggle.textContent = '🔕';
+                ambientOn = true;
+            } else {
+                audio.pause();
+                musicToggle.textContent = '🎵';
+                ambientOn = false;
+            }
+        }
+
+        // ==== TYPEWRITER ====
+        function typeWriter(text, el, delay = 60, cb) {
+            let i = 0;
+            el.textContent = "";
+            function step() {
+                if (i <= text.length) {
+                    el.textContent = text.slice(0, i);
+                    i++;
+                    setTimeout(step, delay);
+                } else if (cb) { cb(); }
+            }
+            step();
+        }
+
+        // ==== FLOATING STARS ====
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 4 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.background = 'rgba(108,99,255,' + (Math.random() * 0.4 + 0.2) + ')';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // ==== CONFETTI ====
+        function launchConfetti(particleCount = 120) {
+            const colors = ["#6c63ff", "#9fa8ff", "#b3a4ff", "#7f7fff", "#d0c7ff"];
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const div = document.createElement("div");
+                div.classList.add("confetti-piece");
+                div.style.background = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 12 + 6;
+                div.style.width = size + "px";
+                div.style.height = size + "px";
+                div.style.left = Math.random() * width + "px";
+                div.style.top = (Math.random() * -60) + "px";
+                confettiContainer.appendChild(div);
+                
+                const duration = Math.random() * 1.3 + 1.4;
+                const rotate = Math.random() * 360;
+                const start = performance.now();
+                
+                function animateConfetti(now) {
+                    const t = (now - start) / (duration * 1000);
+                    if (t > 1) { div.remove(); return; }
+                    const ease = 1 - Math.pow(1 - t, 3);
+                    div.style.transform = `translate3d(0, ${ease * (height + 60)}px, 0) rotate(${rotate + t * 360}deg)`;
+                    div.style.opacity = 1 - t;
+                    requestAnimationFrame(animateConfetti);
+                }
+                requestAnimationFrame(animateConfetti);
+            }
+        }
+
+        // ==== CELEBRATION POPUP ====
+        function showYeeText() {
+            const yee = document.createElement("div");
+            yee.textContent = "Yeee 🎉";
+            yee.style.position = "fixed";
+            yee.style.left = "50%";
+            yee.style.top = "45%";
+            yee.style.transform = "translate(-50%, -50%) scale(0.6)";
+            yee.style.fontSize = "2.2rem";
+            yee.style.color = "#6c63ff";
+            yee.style.zIndex = 1000;
+            yee.style.padding = "12px 18px";
+            yee.style.borderRadius = "14px";
+            yee.style.background = "rgba(255,255,255,0.9)";
+            yee.style.backdropFilter = "blur(6px)";
+            yee.style.fontWeight = "bold";
+            document.body.appendChild(yee);
+            
+            yee.animate([
+                { transform: "translate(-50%, -50%) scale(0.6)", opacity: 0 },
+                { transform: "translate(-50%, -60%) scale(1.2)", opacity: 1 },
+                { transform: "translate(-50%, -70%) scale(1)", opacity: 0 }
+            ], { duration: 1400, easing: "ease-out" }).onfinish = () => yee.remove();
+        }
+
+        // ==== DOWNLOAD ====
+        function downloadText(filename, text) {
+            const a = document.createElement('a');
+            const blob = new Blob([text], { type: 'text/plain' });
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        // ==== EVENT LISTENERS ====
+        showLetterBtn.addEventListener("click", () => {
+            letterTextEl.textContent = letterContent;
+            letterEl.style.display = 'block';
+            letterEl.classList.add('show');
+            
+            letterEl.animate([
+                { transform: "scaleY(0.3) rotateX(15deg)", opacity: 0 },
+                { transform: "scaleY(1) rotateX(0deg)", opacity: 1 }
+            ], { duration: 700, easing: "cubic-bezier(.22,.61,.36,1)" });
+            
+            // Auto start music and effects
+            if (!ambientOn) toggleMusic();
+            launchConfetti(160);
+            showYeeText();
+        });
+
+        replyBtn.addEventListener('click', () => {
+            // Simple reply action - could open email or show a message
+            const replyText = `Dear Fardin,\n\nThank you for the beautiful Friendship Day message! It means so much to me.\n\nWith love,\n${friendName}`;
+            
+            // Create a simple popup or copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(replyText).then(() => {
+                    alert('💌 Reply template copied to clipboard!');
+                });
+            } else {
+                // Fallback - show the text
+                alert('💌 Here\'s a reply template:\n\n' + replyText);
+            }
+        });
+
+        musicToggle.addEventListener('click', toggleMusic);
+
+        // ==== INITIALIZATION ====
+        window.addEventListener('load', () => {
+            createStars();
+            const fullMsg = `Happy Friendship Day, ${friendName}!`;
+            typeWriter(fullMsg, welcomeEl, 60, () => {
+                welcomeEl.animate([
+                    { filter: 'brightness(1)' },
+                    { filter: 'brightness(1.1)' },
+                    { filter: 'brightness(1)' }
+                ], { duration: 800 });
+            });
+        });
+    </script>
+</body>
+</html>
