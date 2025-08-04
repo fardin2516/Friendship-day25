@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Friendship Day, Safa!</title>
+    <title>Happy Friendship Day, Shahriyer!</title>
     <style>
         :root {
             --primary: #8b7cf8;
@@ -16,9 +16,7 @@
             --transition: 0.25s ease;
             --night-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 100%);
         }
-
         * { box-sizing: border-box; }
-
         body {
             margin: 0;
             padding: 0;
@@ -33,7 +31,6 @@
             position: relative;
             overflow-x: hidden;
         }
-
         /* Enhanced Floating Stars */
         .stars {
             position: fixed;
@@ -44,7 +41,6 @@
             pointer-events: none;
             z-index: 0;
         }
-
         .star {
             position: absolute;
             border-radius: 50%;
@@ -52,27 +48,22 @@
             animation: sparkle 4s ease-in-out infinite;
             box-shadow: 0 0 6px currentColor;
         }
-
         .star.bright {
             animation: brightSparkle 3s ease-in-out infinite;
             box-shadow: 0 0 12px currentColor, 0 0 24px currentColor;
         }
-
         .star.shooting {
             animation: shootingStar 8s linear infinite;
             border-radius: 2px;
         }
-
         @keyframes sparkle {
             0%, 100% { opacity: 0; transform: scale(0.8); }
             50% { opacity: 1; transform: scale(1.2); }
         }
-
         @keyframes brightSparkle {
             0%, 100% { opacity: 0.3; transform: scale(0.6); }
             50% { opacity: 1; transform: scale(1.5); }
         }
-
         @keyframes shootingStar {
             0% { 
                 opacity: 0; 
@@ -85,7 +76,6 @@
                 transform: translateX(100vw) translateY(-100px) rotate(-45deg); 
             }
         }
-
         .container {
             position: relative;
             z-index: 1;
@@ -99,7 +89,6 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(139, 124, 248, 0.3);
         }
-
         h1 {
             margin: 0;
             font-size: clamp(1.8rem, 5vw, 2.8rem);
@@ -109,13 +98,11 @@
             min-height: 3.2rem;
             text-shadow: 0 2px 10px rgba(139, 124, 248, 0.5);
         }
-
         .friend-name {
             color: var(--primary);
             font-weight: bold;
             text-shadow: 0 0 20px var(--primary);
         }
-
         .typewriter { display: inline-block; }
         .cursor { 
             display: inline-block; 
@@ -125,9 +112,7 @@
             animation: blink 1s step-end infinite; 
             vertical-align: bottom; 
         }
-
         @keyframes blink { 50% { opacity: 0; } }
-
         .letter-container {
             display: none;
             margin-top: 1.5rem;
@@ -143,7 +128,6 @@
             border: 1px solid rgba(139, 124, 248, 0.4);
             backdrop-filter: blur(10px);
         }
-
         .letter-header { 
             font-size: 0.75rem; 
             color: var(--secondary); 
@@ -151,7 +135,6 @@
             top: 10px; 
             right: 12px; 
         }
-
         .btn { 
             cursor: pointer; 
             background: linear-gradient(135deg, var(--primary), var(--secondary));
@@ -169,14 +152,12 @@
             box-shadow: 0 8px 25px rgba(139, 124, 248, 0.3);
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-
         .btn:hover { 
             filter: brightness(1.1); 
             transform: translateY(-2px);
             box-shadow: 0 12px 35px rgba(139, 124, 248, 0.4);
         }
         .btn:active { transform: scale(0.97); }
-
         /* Reply Icon - Night Theme */
         .reply-icon {
             position: absolute;
@@ -193,18 +174,15 @@
             color: white;
             box-shadow: 0 8px 25px rgba(139, 124, 248, 0.4);
         }
-
         .reply-icon:hover {
             transform: scale(1.1);
             box-shadow: 0 12px 35px rgba(139, 124, 248, 0.6);
             filter: brightness(1.2);
         }
-
         .letter-container.show .reply-icon {
             opacity: 0.9;
             transition-delay: 1s;
         }
-
         /* Music Toggle - Night Theme */
         .music-toggle {
             position: fixed;
@@ -222,13 +200,11 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(139, 124, 248, 0.3);
         }
-
         .music-toggle:hover {
             background: var(--primary);
             color: white;
             box-shadow: 0 6px 20px rgba(139, 124, 248, 0.5);
         }
-
         /* Reply Modal - Night Theme */
         .reply-modal {
             position: fixed;
@@ -244,7 +220,6 @@
             padding: 1rem;
             backdrop-filter: blur(5px);
         }
-
         .reply-box {
             background: var(--card-bg);
             border-radius: 16px;
@@ -256,14 +231,12 @@
             border: 1px solid rgba(139, 124, 248, 0.3);
             backdrop-filter: blur(20px);
         }
-
         .reply-box h3 {
             color: var(--primary);
             margin-bottom: 1rem;
             text-align: center;
             text-shadow: 0 2px 10px rgba(139, 124, 248, 0.3);
         }
-
         .reply-textarea {
             width: 100%;
             min-height: 200px;
@@ -277,36 +250,30 @@
             color: var(--text);
             backdrop-filter: blur(10px);
         }
-
         .reply-textarea:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 20px rgba(139, 124, 248, 0.3);
         }
-
         .send-btn {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             box-shadow: 0 6px 20px rgba(139, 124, 248, 0.3);
         }
-
         .send-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(139, 124, 248, 0.5);
             filter: brightness(1.1);
         }
-
         .cancel-btn {
             background: rgba(71, 85, 105, 0.8);
             color: var(--text);
             border: 1px solid rgba(139, 124, 248, 0.2);
         }
-
         .cancel-btn:hover {
             background: rgba(71, 85, 105, 1);
             border-color: var(--primary);
         }
-
         .close-modal {
             position: absolute;
             top: 15px;
@@ -317,32 +284,9 @@
             cursor: pointer;
             color: var(--text);
         }
-
         .close-modal:hover {
             color: var(--primary);
         }
-
-        /* Music Toggle - Top Corner */
-        .music-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.9);
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .music-toggle:hover {
-            background: var(--primary);
-            color: white;
-        }
-
         /* Confetti */
         .confetti { 
             position: fixed; 
@@ -353,7 +297,6 @@
             pointer-events: none; 
             z-index: 999; 
         }
-
         .confetti-piece { 
             position: absolute; 
             width: 8px; 
@@ -361,7 +304,6 @@
             opacity: 0; 
             border-radius: 50%; 
         }
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container { 
@@ -386,7 +328,6 @@
                 font-size: 0.75rem;
             }
         }
-
         @media (max-width: 480px) {
             h1 { 
                 font-size: 1.8rem;
@@ -402,59 +343,56 @@
 <body>
     <!-- Floating Stars -->
     <div class="stars" id="starsContainer"></div>
-
     <!-- Music Toggle -->
-    <button class="music-toggle" id="musicToggle">🎵</button>
-
+    <button class="music-toggle" id="musicToggle">🚀</button>
     <div class="container">
         <h1>
             <span class="typewriter" id="welcome"></span>
             <span class="cursor"></span>
         </h1>
         
-        <button class="btn" id="showLetterBtn">💌 Open My Letter</button>
+        <button class="btn" id="showLetterBtn">🚀 Open My Letter</button>
         
         <div id="letter" class="letter-container">
-            <div class="letter-header">For you, Aug 3, 2025</div>
+            <div class="letter-header">For my rocket partner, Aug 4, 2025</div>
             <div id="letterText"></div>
             <button class="reply-icon" id="replyBtn" title="Reply to Letter">💬</button>
         </div>
     </div>
-
     <!-- Reply Modal -->
     <div class="reply-modal" id="replyModal">
         <div class="reply-box">
             <button class="close-modal" id="closeModal">×</button>
-            <h3>💌 Reply to Fardin</h3>
+            <h3>🚀 Reply to Fardin</h3>
             <textarea class="reply-textarea" id="replyTextarea" placeholder="Dear Fardin,
-
-Thank you for the beautiful Friendship Day message...
-
-With love,
-Safa"></textarea>
+Thank you for the amazing Friendship Day message...
+Looking forward to our next rocket launch!
+Your teammate,
+Shahriyer"></textarea>
             <div class="reply-buttons">
                 <button class="reply-btn cancel-btn" id="cancelReply">Cancel</button>
-                <button class="reply-btn send-btn" id="sendReply">📨 Send Reply</button>
+                <button class="reply-btn send-btn" id="sendReply">🚀 Send Reply</button>
             </div>
         </div>
     </div>
-
     <div class="confetti" id="confettiContainer"></div>
-
     <script>
         // ==== CUSTOMIZATION ====
-        const friendName = "Safa";
+        const friendName = "Shahriyer";
         const yourEmail = "yeasinahamad2516@gmail.com";
         const letterContent = `Dear ${friendName},
 
-On this Friendship Day, I just want to let you know how much you mean to me. You have been a light, an igniter for me, a support, and a true friend in every sense.
 
-Thank you for all the moments, big and small. I'm grateful for you every day.
+On this Friendship Day, I just want to let you know how much you mean to me. You’ve been a brother, a partner in my adventures, and a true friend who stands by me in every challenge.
+
+Thank you for all the crazy, fun, and unforgettable moments we’ve shared. I’m grateful for you every day.
 
 And you should write a letter to me too!
 
 Yours truly,
-Fardin`;
+Fardin
+
+`;
 
         // ==== ELEMENTS ====
         const welcomeEl = document.getElementById("welcome");
@@ -489,7 +427,7 @@ Fardin`;
                 ambientOn = true;
             } else {
                 audio.pause();
-                musicToggle.textContent = '🎵';
+                musicToggle.textContent = '🚀';
                 ambientOn = false;
             }
         }
@@ -604,13 +542,13 @@ Fardin`;
         // ==== CELEBRATION POPUP ====
         function showYeeText() {
             const yee = document.createElement("div");
-            yee.textContent = "Yeee 🎉";
+            yee.textContent = "Launch! 🚀";
             yee.style.position = "fixed";
             yee.style.left = "50%";
             yee.style.top = "45%";
             yee.style.transform = "translate(-50%, -50%) scale(0.6)";
             yee.style.fontSize = "2.2rem";
-            yee.style.color = "#6c63ff";
+            yee.style.color = "#8b7cf8";
             yee.style.zIndex = 1000;
             yee.style.padding = "12px 18px";
             yee.style.borderRadius = "14px";
@@ -624,16 +562,6 @@ Fardin`;
                 { transform: "translate(-50%, -60%) scale(1.2)", opacity: 1 },
                 { transform: "translate(-50%, -70%) scale(1)", opacity: 0 }
             ], { duration: 1400, easing: "ease-out" }).onfinish = () => yee.remove();
-        }
-
-        // ==== DOWNLOAD ====
-        function downloadText(filename, text) {
-            const a = document.createElement('a');
-            const blob = new Blob([text], { type: 'text/plain' });
-            a.href = URL.createObjectURL(blob);
-            a.download = filename;
-            a.click();
-            URL.revokeObjectURL(a.href);
         }
 
         // ==== EVENT LISTENERS ====
@@ -654,17 +582,14 @@ Fardin`;
         });
 
         replyBtn.addEventListener('click', () => {
-            // Simple reply action - could open email or show a message
-            const replyText = `Dear Fardin,\n\nThank you for the beautiful Friendship Day message! It means so much to me.\n\nWith love,\n${friendName}`;
+            const replyText = `Dear Fardin,\n\nThank you for the amazing Friendship Day message! Our rocket-building partnership has been incredible, and I'm grateful for all the innovative projects we've worked on together.\n\nLooking forward to our next launch!\n\nYour teammate and friend,\n${friendName}`;
             
-            // Create a simple popup or copy to clipboard
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(replyText).then(() => {
-                    alert('💌 Reply template copied to clipboard!');
+                    alert('🚀 Reply template copied to clipboard!');
                 });
             } else {
-                // Fallback - show the text
-                alert('💌 Here\'s a reply template:\n\n' + replyText);
+                alert('🚀 Here\'s a reply template:\n\n' + replyText);
             }
         });
 
